@@ -9,7 +9,7 @@
 			<!-- 主体 -->
 			<view class="main">
 				<!-- <u-upload :action="action"></u-upload> -->
-				<wInput v-model="registerForm.username" type="text" maxlength="11" placeholder="昵称"></wInput>
+				<wInput v-model="registerForm.username" type="text" maxlength="11" placeholder="用户名"></wInput>
 				<wInput v-model="registerForm.mobile" type="text" maxlength="11" placeholder="手机号"></wInput>
 				<wInput v-model="registerForm.password" type="password" maxlength="11" placeholder="登录密码" isShowPass>
 				</wInput>
@@ -22,8 +22,8 @@
 
 			<!-- 底部信息 -->
 			<view class="footer">
-				<navigator url="findPassWord" open-type="navigate">找回密码</navigator>
-				<text>|</text>
+<!-- 				<navigator url="findPassWord" open-type="navigate">找回密码</navigator>
+				<text>|</text> -->
 				<navigator url="login" open-type="navigate">登录</navigator>
 			</view>
 		</view>

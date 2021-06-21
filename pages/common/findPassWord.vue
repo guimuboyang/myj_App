@@ -5,7 +5,7 @@
 			<!-- 主体 -->
 			<view class="main">
 				<view class="tips">若你忘记了密码，可在此重置新密码。</view>
-			<!-- 	<wInput v-model="checkForm.username" type="text" maxlength="11" placeholder="请输入手机号码"></wInput> -->
+				<!-- 	<wInput v-model="checkForm.username" type="text" maxlength="11" placeholder="请输入手机号码"></wInput> -->
 				<wInput v-model="checkForm.password" type="password" maxlength="11" placeholder="请输入新密码" isShowPass>
 				</wInput>
 
@@ -13,7 +13,7 @@
 					setTime="30" ref="runCode" @setCode="getVerCode()"></wInput> -->
 			</view>
 
-			<wButton class="wbutton" text="重置密码" :rotate="isRotate" @click.native="startRePass()"></wButton>
+			<wButton class="wbutton" text="重置密码" :rotate="isRotate" @click.native="createToken()"></wButton>
 			<!-- 底部信息 -->
 			<view class="footer">
 				<navigator url="registered" open-type="navigate">注册</navigator>
@@ -33,7 +33,7 @@
 		data() {
 			return {
 				checkForm: {
-					uniIdToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGNmMjM3YjNiN2QzNTAwMDE0YWZmMDUiLCJyb2xlIjpbXSwicGVybWlzc2lvbiI6W10sImlhdCI6MTYyNDE4Nzc3MSwiZXhwIjoxNjI0MTk0OTcxfQ.iTHrih1qXpaL2UpuIgqO_4gfZIjyHacdbv0ralv11pM",
+					uniIdToken: "",
 					password: ""
 				},
 				verCode: "", //验证码
@@ -75,7 +75,21 @@
 					});
 				}, 3000)
 			},
+			async createToken() {
+				const uId = uni.getStorageSync('uid');
+				console.log(uId)
+				let res = await this.$uniCloud("createToken", {
+					uid: uId
+				})
+				console.log(res)
+				if (res.result.token) {
+					this.checkForm.uniIdToken = res.result.token
+					this.startRePass()
+				}
+			},
+
 			async startRePass() {
+				console.log(this.checkForm.uniIdToken)
 				let res = await this.$uniCloud("findPassword", this.checkForm)
 				console.log(res)
 				if (res.result.code === 0) {

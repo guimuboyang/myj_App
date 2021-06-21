@@ -7,7 +7,7 @@
 			</view>
 			<!-- 主体表单 -->
 			<view class="main">
-				<wInput v-model="loginForm.username" type="text" maxlength="11" placeholder="用户名/电话" :focus="isFocus">
+				<wInput v-model="loginForm.username" type="text" maxlength="11" placeholder="用户名" :focus="isFocus">
 				</wInput>
 				<wInput v-model="loginForm.password" type="password" maxlength="11" placeholder="密码"></wInput>
 			</view>
@@ -28,8 +28,8 @@
 
 			<!-- 底部信息 -->
 			<view class="footer">
-				<navigator url="findPassWord" open-type="navigate">找回密码</navigator>
-				<text>|</text>
+				<!-- <navigator url="findPassWord" open-type="navigate">找回密码</navigator>
+				<text>|</text> -->
 				<navigator url="registered" open-type="navigate">注册账号</navigator>
 			</view>
 		</view>
@@ -84,7 +84,11 @@
 				if (res.result.code === 0) {
 					this.$toast(res.result.message)
 					uni.setStorageSync("role", res.result.userInfo.role)
-					uni.setStorageSync("token", res.result.token)
+					uni.setStorageSync("uni_id_token", res.result.token)
+					uni.setStorageSync("uid", res.result.uid)
+					uni.reLaunch({
+						url: "../pagesMenu/home"
+					})
 				} else {
 					this.$toast(res.result.msg)
 				}
