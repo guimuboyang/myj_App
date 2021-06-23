@@ -28,8 +28,8 @@
 
 			<!-- 底部信息 -->
 			<view class="footer">
-				<!-- <navigator url="findPassWord" open-type="navigate">找回密码</navigator>
-				<text>|</text> -->
+				<navigator url="findPassWord" open-type="navigate">验证码登录</navigator>
+				<text>|</text>
 				<navigator url="registered" open-type="navigate">注册账号</navigator>
 			</view>
 		</view>

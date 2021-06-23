@@ -13,8 +13,17 @@
 				<wInput v-model="registerForm.mobile" type="text" maxlength="11" placeholder="手机号"></wInput>
 				<wInput v-model="registerForm.password" type="password" maxlength="11" placeholder="登录密码" isShowPass>
 				</wInput>
-				<!-- 				<wInput v-model="verCode" type="number" maxlength="4" placeholder="验证码" isShowCode ref="runCode"
-					@setCode="getVerCode()"></wInput> -->
+				<view class="u-flex u-col-center">
+					<view>
+						<wInput v-model="registerForm.code" type="number" maxlength="6" placeholder="验证码"></wInput>
+					</view>
+					<view>
+						<u-verification-code :seconds="seconds" @start="start" ref="uCode" @change="codeChange"
+							change-text="X秒"></u-verification-code>
+						<u-button @tap="getVerCode" size="mini">{{tips}}</u-button>
+					</view>
+				</view>
+
 
 			</view>
 
@@ -22,11 +31,12 @@
 
 			<!-- 底部信息 -->
 			<view class="footer">
-<!-- 				<navigator url="findPassWord" open-type="navigate">找回密码</navigator>
+				<!-- 				<navigator url="findPassWord" open-type="navigate">找回密码</navigator>
 				<text>|</text> -->
 				<navigator url="login" open-type="navigate">登录</navigator>
 			</view>
 		</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -41,8 +51,13 @@
 				registerForm: {
 					username: "",
 					mobile: '', // 用户/电话
-					password: '', //密码
+					code: "",
+					type: "register",
+					password: '' //密码
 				},
+				tips: '',
+				// refCode: null,
+				seconds: 30,
 				showAgree: true, //协议是否选择
 				isRotate: false, //是否加载旋转
 			}
@@ -55,37 +70,35 @@
 			_this = this;
 		},
 		methods: {
+			codeChange(text) {
+				this.tips = text;
+			},
 			// isShowAgree() {
 			// 	//是否选择协议
 			// 	_this.showAgree = !_this.showAgree;
 			// },
-			// getVerCode() {
-			// 	//获取验证码
-			// 	if (_this.phoneData.length != 11) {
-			// 		uni.showToast({
-			// 			icon: 'none',
-			// 			position: 'bottom',
-			// 			title: '手机号不正确'
-			// 		});
-			// 		return false;
-			// 	}
-			// 	console.log("获取验证码")
-			// 	this.$refs.runCode.$emit('runCode'); //触发倒计时（一般用于请求成功验证码后调用）
-			// 	uni.showToast({
-			// 		icon: 'none',
-			// 		position: 'bottom',
-			// 		title: '模拟倒计时触发'
-			// 	});
+			getVerCode() {
+				if (this.$refs.uCode.canGetCode) {
+					setTimeout(async () => {
+						//获取验证码
+						let res = await this.$uniCloud('sendSms', {
+							mobile: this.registerForm.mobile
+						})
+						// console.log(res)
+						// 这里此提示会被this.start()方法中的提示覆盖
 
-			// 	setTimeout(function() {
-			// 		_this.$refs.runCode.$emit('runCode', 0); //假装模拟下需要 终止倒计时
-			// 		uni.showToast({
-			// 			icon: 'none',
-			// 			position: 'bottom',
-			// 			title: '模拟倒计时终止'
-			// 		});
-			// 	}, 3000)
-			// },
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}, 500);
+				} else {
+					this.$u.toast('倒计时结束后再发送');
+				}
+			},
+			start() {
+				uni.showToast({
+					title: "验证码发送成功"
+				})
+			},
 			async startReg() {
 				console.log(this.registerForm)
 				let res = await this.$uniCloud('register', this.registerForm)

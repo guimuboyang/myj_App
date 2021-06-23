@@ -23,7 +23,6 @@
 					selectedIconPath: 'static/setting-fill.png',
 				})
 			}
-
 		},
 		methods: {
 			async logOut() {
