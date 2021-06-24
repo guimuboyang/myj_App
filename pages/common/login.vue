@@ -3,35 +3,44 @@
 		<view class="content">
 			<!-- 头部logo -->
 			<view class="header">
-				<image src="/static/login.jpg"></image>
+				<image src="/static/img/login.jpg"></image>
 			</view>
 			<!-- 主体表单 -->
 			<view class="main">
-				<wInput v-model="loginForm.username" type="text" maxlength="11" placeholder="用户名" :focus="isFocus">
+				<wInput v-model="loginForm.mobile" type="text" maxlength="11" placeholder="手机号" :focus="isFocus">
 				</wInput>
-				<wInput v-model="loginForm.password" type="password" maxlength="11" placeholder="密码"></wInput>
+				<view class="u-flex u-col-center">
+					<view class="u-flex-5 m-r-20">
+						<wInput v-model="loginForm.code" type="number" maxlength="6" placeholder="验证码"></wInput>
+					</view>
+					<view class="u-flex-2">
+						<u-verification-code :seconds="seconds" @start="start" ref="uCode" @change="codeChange"
+							change-text="X秒" start-text="获取验证码"></u-verification-code>
+						<text @tap="getVerCode" size="mini">{{tips}}</text>
+					</view>
+				</view>
 			</view>
-			<wButton class="wbutton" text="登 录" :rotate="isRotate" @click="startLogin"></wButton>
+			<wButton class="wbutton" text="登录" :rotate="isRotate" @click.native="smsLogin()"></wButton>
 
 			<!-- 其他登录 -->
-			<!-- 		<view class="other_login cuIcon">
-				<view class="login_icon">
+			<view class="other_login cuIcon">
+				<view class="login_icon" style="margin-bottom: 20rpx;">
 					<view class="cuIcon-weixin" @tap="login_weixin"></view>
 				</view>
-				<view class="login_icon">
+				<!-- 	<view class="login_icon">
 					<view class="cuIcon-weibo" @tap="login_weibo"></view>
 				</view>
 				<view class="login_icon">
 					<view class="cuIcon-github" @tap="login_github"></view>
-				</view>
-			</view> -->
+				</view> -->
+			</view>
 
 			<!-- 底部信息 -->
-			<view class="footer">
-				<navigator url="findPassWord" open-type="navigate">验证码登录</navigator>
+			<!-- 			<view class="footer">
+				<navigator url="smsLogin" open-type="navigate">验证码登录</navigator>
 				<text>|</text>
 				<navigator url="registered" open-type="navigate">注册账号</navigator>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -45,9 +54,10 @@
 		data() {
 			return {
 				loginForm: {
-					username: '', //用户/电话
-					password: '', //密码
+					mobile: '', // 用户/电话
+					code: "",
 				},
+				tips: '',
 				isRotate: false, //是否加载旋转
 				isFocus: true // 是否聚焦
 			};
@@ -61,25 +71,33 @@
 			//this.isLogin();
 		},
 		methods: {
-			isLogin() {
-				//判断缓存中是否登录过，直接登录
-				// try {
-				// 	const value = uni.getStorageSync('setUserData');
-				// 	if (value) {
-				// 		//有登录信息
-				// 		console.log("已登录用户：",value);
-				// 		_this.$store.dispatch("setUserData",value); //存入状态
-				// 		uni.reLaunch({
-				// 			url: '../../../pages/index',
-				// 		});
-				// 	}
-				// } catch (e) {
-				// 	// error
-				// }
+			codeChange(text) {
+				this.tips = text;
 			},
-			async startLogin(e) {
-				console.log(this.registerForm)
-				let res = await this.$uniCloud('login', this.loginForm)
+			getVerCode() {
+				if (this.$refs.uCode.canGetCode) {
+					setTimeout(async () => {
+						//获取验证码
+						let res = await this.$uniCloud('sendSms', {
+							mobile: this.loginForm.mobile
+						})
+						// console.log(res)
+						// 这里此提示会被this.start()方法中的提示覆盖
+
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}, 500);
+				} else {
+					this.$u.toast('倒计时结束后再发送');
+				}
+			},
+			start() {
+				uni.showToast({
+					title: "验证码发送成功"
+				})
+			},
+			async smsLogin() {
+				let res = await this.$uniCloud('loginBySms', this.loginForm)
 				console.log(res)
 				if (res.result.code === 0) {
 					this.$toast(res.result.message)
@@ -92,8 +110,7 @@
 				} else {
 					this.$toast(res.result.msg)
 				}
-
-			},
+			}
 			// login_weixin() {
 			// 	//微信登录
 			// 	uni.showToast({

@@ -4,6 +4,12 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/pagesMenu/home",
+			"style": {
+				"navigationBarTitleText": "麻友记"
+			}
+		},
+		{
 			"path": "pages/common/login",
 			"style": {
 				"navigationBarTitleText": "登录"
@@ -16,17 +22,12 @@
 			}
 		},
 		{
-			"path": "pages/common/findPassWord",
+			"path": "pages/common/smsLogin",
 			"style": {
-				"navigationBarTitleText": "找回密码"
+				"navigationBarTitleText": "验证码登录"
 			}
 		},
-		{
-			"path": "pages/pagesMenu/home",
-			"style": {
-				"navigationBarTitleText": "麻友记"
-			}
-		},
+
 		{
 			"path": "pages/pagesMenu/mine",
 			"style": {
@@ -34,12 +35,21 @@
 			}
 		},
 		{
-			"path": "pages/pagesMenu/userManagement",
+			"path": "pages/pagesMenu/utils",
 			"style": {
 				"navigationBarTitleText": "麻友记"
 			}
 		}
 	],
+	"subPackages": [{
+		"root": "pagesSubpackOne",
+		"pages": [{
+			"path": "mine/personInfo/index",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		}]
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -52,15 +62,23 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/pagesMenu/home",
-			"iconPath": "static/home.png",
-			"selectedIconPath": "static/home-fill.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/pagesMenu/mine",
-			"iconPath": "static/mine.png",
-			"selectedIconPath": "static/mine-fill.png",
-			"text": "我的"
-		}]
+				"pagePath": "pages/pagesMenu/home",
+				"iconPath": "static/img/home.png",
+				"selectedIconPath": "static/img/home-fill.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/pagesMenu/utils",
+				"iconPath": "static/img/setting.png",
+				"selectedIconPath": "static/img/setting-fill.png",
+				"text": "工具"
+			},
+			{
+				"pagePath": "pages/pagesMenu/mine",
+				"iconPath": "static/img/mine.png",
+				"selectedIconPath": "static/img/mine-fill.png",
+				"text": "我的"
+			}
+		]
 	}
 }

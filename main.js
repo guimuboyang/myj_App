@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-
+import "./static/main.css"
 Vue.config.productionTip = false
 
 import uView from "uview-ui";

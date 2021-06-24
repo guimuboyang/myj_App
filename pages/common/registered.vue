@@ -9,18 +9,18 @@
 			<!-- 主体 -->
 			<view class="main">
 				<!-- <u-upload :action="action"></u-upload> -->
-				<wInput v-model="registerForm.username" type="text" maxlength="11" placeholder="用户名"></wInput>
+				<!-- <wInput v-model="registerForm.username" type="text" maxlength="11" placeholder="用户名"></wInput> -->
 				<wInput v-model="registerForm.mobile" type="text" maxlength="11" placeholder="手机号"></wInput>
-				<wInput v-model="registerForm.password" type="password" maxlength="11" placeholder="登录密码" isShowPass>
-				</wInput>
+				<!-- <wInput v-model="registerForm.password" type="password" maxlength="11" placeholder="登录密码" isShowPass>
+				</wInput> -->
 				<view class="u-flex u-col-center">
-					<view>
+					<view class="u-flex-5 m-r-20">
 						<wInput v-model="registerForm.code" type="number" maxlength="6" placeholder="验证码"></wInput>
 					</view>
-					<view>
+					<view class="u-flex-2">
 						<u-verification-code :seconds="seconds" @start="start" ref="uCode" @change="codeChange"
-							change-text="X秒"></u-verification-code>
-						<u-button @tap="getVerCode" size="mini">{{tips}}</u-button>
+							change-text="X秒" start-text="获取验证码"></u-verification-code>
+						<text @tap="getVerCode" size="mini">{{tips}}</text>
 					</view>
 				</view>
 
@@ -31,8 +31,8 @@
 
 			<!-- 底部信息 -->
 			<view class="footer">
-				<!-- 				<navigator url="findPassWord" open-type="navigate">找回密码</navigator>
-				<text>|</text> -->
+				<navigator url="smsLogin" open-type="navigate">验证码登录</navigator>
+				<text>|</text>
 				<navigator url="login" open-type="navigate">登录</navigator>
 			</view>
 		</view>
@@ -49,11 +49,8 @@
 		data() {
 			return {
 				registerForm: {
-					username: "",
 					mobile: '', // 用户/电话
 					code: "",
-					type: "register",
-					password: '' //密码
 				},
 				tips: '',
 				// refCode: null,
@@ -101,7 +98,7 @@
 			},
 			async startReg() {
 				console.log(this.registerForm)
-				let res = await this.$uniCloud('register', this.registerForm)
+				let res = await this.$uniCloud('registerBySms', this.registerForm)
 				console.log(res)
 				if (res.result.code === 0) {
 					this.$toast(res.result.message)
