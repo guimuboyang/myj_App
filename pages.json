@@ -6,13 +6,20 @@
 		{
 			"path": "pages/pagesMenu/home",
 			"style": {
-				"navigationBarTitleText": "麻友记"
+				"navigationBarTitleText": "麻友记",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/common/passwordLogin",
+			"style": {
+				"navigationBarTitleText": "密码登录"
 			}
 		},
 		{
 			"path": "pages/common/login",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"navigationBarTitleText": "验证码登录"
 			}
 		},
 		{
@@ -22,16 +29,10 @@
 			}
 		},
 		{
-			"path": "pages/common/smsLogin",
-			"style": {
-				"navigationBarTitleText": "验证码登录"
-			}
-		},
-
-		{
 			"path": "pages/pagesMenu/mine",
 			"style": {
-				"navigationBarTitleText": "麻友记"
+				"navigationBarTitleText": "麻友记",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -43,12 +44,28 @@
 	],
 	"subPackages": [{
 		"root": "pagesSubpackOne",
-		"pages": [{
-			"path": "mine/personInfo/index",
-			"style": {
-				"navigationBarTitleText": "个人信息"
+		"pages": [
+			/*个人中心*/
+			{
+				"path": "mine/personInfo/index",
+				"style": {
+					"navigationBarTitleText": "个人信息"
+				}
+			},
+			{
+				"path": "mine/resetPassword/resetPassword",
+				"style": {
+					"navigationBarTitleText": "重置密码"
+				}
+			},
+			/*房间*/
+			{
+				"path": "home/room/roomDeatil",
+				"style": {
+					"navigationBarTitleText": "房间详情"
+				}
 			}
-		}]
+		]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

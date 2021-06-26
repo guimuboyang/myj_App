@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/pagesMenu/home",
+    "pages/common/passwordLogin",
     "pages/common/login",
     "pages/common/registered",
-    "pages/common/smsLogin",
     "pages/pagesMenu/mine",
     "pages/pagesMenu/utils"
   ],
@@ -11,7 +11,9 @@
     {
       "root": "pagesSubpackOne",
       "pages": [
-        "mine/personInfo/index"
+        "mine/personInfo/index",
+        "mine/resetPassword/resetPassword",
+        "home/room/roomDeatil"
       ]
     }
   ],

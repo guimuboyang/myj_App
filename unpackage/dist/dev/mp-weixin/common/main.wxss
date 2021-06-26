@@ -3316,8 +3316,20 @@ u-dropdown {
 
 
 
+page {
+	background: #f3f4f6;
+}
+
+.commonCard {
+	background-color: #fff;
+}
+
 .m-r-20 {
 	margin-right: 20rpx;
+}
+
+.m-t-20 {
+	margin-top: 20rpx;
 }
 
 .p-16-32 {

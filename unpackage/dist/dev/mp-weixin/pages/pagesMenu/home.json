@@ -1,4 +1,9 @@
 {
   "navigationBarTitleText": "麻友记",
-  "usingComponents": {}
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
+    "u-card": "/node-modules/uview-ui/components/u-card/u-card",
+    "u-tag": "/node-modules/uview-ui/components/u-tag/u-tag"
+  }
 }

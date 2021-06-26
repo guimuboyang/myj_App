@@ -36,11 +36,11 @@
 			</view>
 
 			<!-- 底部信息 -->
-			<!-- 			<view class="footer">
-				<navigator url="smsLogin" open-type="navigate">验证码登录</navigator>
-				<text>|</text>
-				<navigator url="registered" open-type="navigate">注册账号</navigator>
-			</view> -->
+			<view class="footer">
+				<navigator url="passwordLogin" open-type="navigate">密码登录</navigator>
+				<!-- <text>|</text>
+				<navigator url="registered" open-type="navigate">注册账号</navigator> -->
+			</view>
 		</view>
 	</view>
 </template>
@@ -57,9 +57,10 @@
 					mobile: '', // 用户/电话
 					code: "",
 				},
+				seconds: 30,
 				tips: '',
 				isRotate: false, //是否加载旋转
-				isFocus: true // 是否聚焦
+				isFocus: false // 是否聚焦
 			};
 		},
 		components: {
@@ -81,7 +82,7 @@
 						let res = await this.$uniCloud('sendSms', {
 							mobile: this.loginForm.mobile
 						})
-						// console.log(res)
+						console.log(res)
 						// 这里此提示会被this.start()方法中的提示覆盖
 
 						// 通知验证码组件内部开始倒计时
@@ -97,6 +98,7 @@
 				})
 			},
 			async smsLogin() {
+				this.isRotate = true
 				let res = await this.$uniCloud('loginBySms', this.loginForm)
 				console.log(res)
 				if (res.result.code === 0) {

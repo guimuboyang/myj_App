@@ -8,7 +8,9 @@ exports.main = async function(event, context) {
 	}
 	const res = await uniID.updateUser({
 		uid: event.uid,
-		nickname: event.nickname
+		nickname: event.nickname,
+		username: event.username,
+		password: event.password
 	})
 	return res
 }

@@ -7,7 +7,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud, createApp) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 7));__webpack_require__(/*! uni-pages */ 12);var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni, createApp) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 7));__webpack_require__(/*! uni-pages */ 12);var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 13));
 __webpack_require__(/*! ./static/main.css */ 19);
 
@@ -16,18 +16,17 @@ var _uviewUi = _interopRequireDefault(__webpack_require__(/*! uview-ui */ 20));f
 _vue.default.use(_uviewUi.default);
 
 
-_vue.default.prototype.$uniCloud = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(name, data) {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            uni.showLoading();_context.prev = 1;_context.next = 4;return (
+_vue.default.prototype.$uniCloud = /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(name, data) {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
 
               uniCloud.callFunction({
                 name: name, // 云函数名字
                 data: data // 传输数据
-              }));case 4:res = _context.sent;return _context.abrupt("return",
-            res);case 8:_context.prev = 8;_context.t0 = _context["catch"](1);return _context.abrupt("return", _context.t0);case 11:_context.prev = 11;
+              }));case 3:res = _context.sent;return _context.abrupt("return",
+            res);case 7:_context.prev = 7;_context.t0 = _context["catch"](0);return _context.abrupt("return", _context.t0);case 10:_context.prev = 10;return _context.finish(10);case 12:case "end":return _context.stop();}}}, _callee, null, [[0, 7, 10, 12]]);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}();
 
 
 
-            uni.hideLoading();return _context.finish(11);case 14:case "end":return _context.stop();}}}, _callee, null, [[1, 8, 11, 14]]);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}();
+
 
 
 _vue.default.prototype.$toast = function (title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1500;return uni.showToast({
@@ -42,7 +41,7 @@ var app = new _vue.default(_objectSpread({},
 _App.default));
 
 createApp(app).$mount();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 4)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 3)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 3)["createApp"]))
 
 /***/ }),
 /* 1 */,

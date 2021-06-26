@@ -8,7 +8,6 @@ Vue.use(uView);
 
 
 Vue.prototype.$uniCloud = async (name, data) => {
-	uni.showLoading()
 	try {
 		let res = await uniCloud.callFunction({
 			name, // 云函数名字
@@ -18,7 +17,7 @@ Vue.prototype.$uniCloud = async (name, data) => {
 	} catch (e) {
 		return e
 	} finally {
-		uni.hideLoading()
+
 	}
 }
 Vue.prototype.$toast = (title, duration = 1500) => uni.showToast({
