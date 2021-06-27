@@ -156,6 +156,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _this;var wInput = function wInput() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-input */ "components/watch-login/watch-input").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-input.vue */ 131));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var wButton = function wButton() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-button */ "components/watch-login/watch-button").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-button.vue */ 138));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
@@ -165,7 +177,7 @@ var _default = {
     return {
       loginForm: {
         username: '', // 用户/电话
-        password: "" },
+        password: '' },
 
       isRotate: false, //是否加载旋转
       isFocus: false // 是否聚焦
@@ -182,11 +194,14 @@ var _default = {
                 console.log(res);
                 if (res.result.code === 0) {
                   _this2.$toast(res.result.message);
-                  uni.setStorageSync("role", res.result.userInfo.role);
-                  uni.setStorageSync("uni_id_token", res.result.token);
-                  uni.setStorageSync("uid", res.result.uid);
+                  uni.setStorageSync(
+                  'userInfo',
+                  JSON.stringify(res.result.userInfo));
+
+                  uni.setStorageSync('uni_id_token', res.result.token);
+                  uni.setStorageSync('uid', res.result.uid);
                   uni.reLaunch({
-                    url: "../pagesMenu/home" });
+                    url: '../pagesMenu/home' });
 
                 } else {
                   _this2.$toast(res.result.msg);

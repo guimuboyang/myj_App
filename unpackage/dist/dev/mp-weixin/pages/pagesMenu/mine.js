@@ -162,7 +162,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 7));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 7));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
 //
 //
 //
@@ -257,11 +261,44 @@ var _default =
                 }
                 console.log(res);case 7:case "end":return _context.stop();}}}, _callee);}))();
     },
-    getUserInfo: function getUserInfo() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                  _this2.$uniCloud('getUserInfo'));case 2:res = _context2.sent;
+    //设置头像
+    setAvatar: function setAvatar() {
+      var that = this;
+      uni.chooseImage({
+        count: 1,
+        success: function success(res) {return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var filePath, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                    console.log(res);if (!(
+                    res.tempFilePaths.length > 0)) {_context2.next = 8;break;}
+                    filePath = res.tempFilePaths[0];
+                    //进行上传操作
+                    _context2.next = 5;return uniCloud.uploadFile({
+                      filePath: filePath,
+                      cloudPath:
+                      String(Math.random() * 5).split('.')[1] +
+                      '.jpg',
+                      fileType: 'image' });case 5:result = _context2.sent;
+
+                    console.log(result.fileID);
+                    that.saveAvatar(result.fileID);case 8:case "end":return _context2.stop();}}}, _callee2);}))();
+
+        } });
+
+    },
+    saveAvatar: function saveAvatar(url) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                console.log(_this2.userInfo._id);_context3.next = 3;return (
+                  _this2.$uniCloud('setUserAvatar', {
+                    uid: _this2.userInfo._id,
+                    avatar: url }));case 3:res = _context3.sent;
+
+                console.log(res);
+                _this2.pic = url;case 6:case "end":return _context3.stop();}}}, _callee3);}))();
+    },
+    getUserInfo: function getUserInfo() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
+                  _this3.$uniCloud('getUserInfo'));case 2:res = _context4.sent;
                 console.log(res);
                 if (res.result.code == 0) {
-                  _this2.userInfo = res.result.userInfo;
+                  _this3.userInfo = res.result.userInfo;
+                  _this3.pic = _this3.userInfo.avatar;
                 } else if (res.result.code == 30204) {
                   uni.showToast({
                     title: '登陆已过期',
@@ -284,7 +321,7 @@ var _default =
                       url: '/pages/common/login' });
 
                   }, 1500);
-                }case 5:case "end":return _context2.stop();}}}, _callee2);}))();
+                }case 5:case "end":return _context4.stop();}}}, _callee4);}))();
     },
     //跳往个人信息
     toPersonal: function toPersonal() {
@@ -297,8 +334,16 @@ var _default =
       uni.navigateTo({
         url: '/pagesSubpackOne/mine/resetPassword/resetPassword' });
 
+    },
+    //跳往绑定设置
+    tobind: function tobind() {
+      uni.navigateTo({
+        url:
+        '/pagesSubpackOne/mine/setting/bind?wx_openid=' +
+        this.userInfo.wx_openid });
+
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 3)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 3)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

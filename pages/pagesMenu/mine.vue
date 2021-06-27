@@ -8,7 +8,7 @@
 			</view>
 		</u-navbar> -->
 		<view class="u-flex u-col-center u-row-around user-box p-16-32">
-			<view class="u-m-r-10">
+			<view class="u-m-r-10" @click="setAvatar()">
 				<u-avatar :src="pic" size="140"></u-avatar>
 			</view>
 			<view class="u-flex-1">
@@ -33,8 +33,6 @@
 
 		<view class="u-m-t-20">
 			<u-cell-group>
-				<!-- 		<u-cell-item icon="star" title="收藏"></u-cell-item>
-				<u-cell-item icon="photo" title="相册"></u-cell-item> -->
 				<u-cell-item
 					icon="account"
 					title="设置个人信息"
@@ -45,6 +43,12 @@
 					title="重置密码"
 					@click="toResetPassword()"
 				></u-cell-item>
+				<u-cell-item
+					icon="setting"
+					title="绑定设置"
+					@click="tobind()"
+				></u-cell-item>
+				<u-cell-item icon="pushpin" title="版本信息"></u-cell-item>
 			</u-cell-group>
 		</view>
 
@@ -93,11 +97,44 @@ export default {
 			}
 			console.log(res);
 		},
+		//设置头像
+		setAvatar() {
+			let that = this;
+			uni.chooseImage({
+				count: 1,
+				async success(res) {
+					console.log(res);
+					if (res.tempFilePaths.length > 0) {
+						let filePath = res.tempFilePaths[0];
+						//进行上传操作
+						const result = await uniCloud.uploadFile({
+							filePath: filePath,
+							cloudPath:
+								String(Math.random() * 5).split('.')[1] +
+								'.jpg',
+							fileType: 'image'
+						});
+						console.log(result.fileID);
+						that.saveAvatar(result.fileID);
+					}
+				}
+			});
+		},
+		async saveAvatar(url) {
+			console.log(this.userInfo._id);
+			let res = await this.$uniCloud('setUserAvatar', {
+				uid: this.userInfo._id,
+				avatar: url
+			});
+			console.log(res);
+			this.pic = url;
+		},
 		async getUserInfo() {
 			let res = await this.$uniCloud('getUserInfo');
 			console.log(res);
 			if (res.result.code == 0) {
 				this.userInfo = res.result.userInfo;
+				this.pic = this.userInfo.avatar;
 			} else if (res.result.code == 30204) {
 				uni.showToast({
 					title: '登陆已过期',
@@ -132,6 +169,14 @@ export default {
 		toResetPassword() {
 			uni.navigateTo({
 				url: '/pagesSubpackOne/mine/resetPassword/resetPassword'
+			});
+		},
+		//跳往绑定设置
+		tobind() {
+			uni.navigateTo({
+				url:
+					'/pagesSubpackOne/mine/setting/bind?wx_openid=' +
+					this.userInfo.wx_openid
 			});
 		}
 	}

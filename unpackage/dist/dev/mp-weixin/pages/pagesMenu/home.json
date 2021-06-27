@@ -4,6 +4,7 @@
   "usingComponents": {
     "u-search": "/node-modules/uview-ui/components/u-search/u-search",
     "u-card": "/node-modules/uview-ui/components/u-card/u-card",
-    "u-tag": "/node-modules/uview-ui/components/u-tag/u-tag"
+    "u-tag": "/node-modules/uview-ui/components/u-tag/u-tag",
+    "loading": "/components/loading"
   }
 }

@@ -6,8 +6,7 @@ exports.main = async function(event, context) {
 		return payload
 	}
 	const res = await uniID.getUserInfo({
-		uid: payload.uid,
-		field: ["nickname", "username", "mobile"]
+		uid: payload.uid
 	})
 	return res
 }

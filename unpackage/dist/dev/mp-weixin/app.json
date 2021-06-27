@@ -13,6 +13,7 @@
       "pages": [
         "mine/personInfo/index",
         "mine/resetPassword/resetPassword",
+        "mine/setting/bind",
         "home/room/roomDeatil"
       ]
     }

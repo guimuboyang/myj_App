@@ -1,21 +1,29 @@
 <template>
 	<view>
-		<view class="u-flex u-row-between u-flex-wrap p-16-32">
-			<view
-				class="commonCard p-16-32 userBox m-t-20"
-				v-for="(item, index) in userList"
-				:key="index"
-			>
-				{{ item.nickname }}
+		<view v-if="isLoad == true"><loading></loading></view>
+		<view v-else>
+			<view class="u-flex u-row-between u-flex-wrap p-16-32">
+				<view
+					class="commonCard p-16-32 userBox m-t-20"
+					v-for="(item, index) in userList"
+					:key="index"
+				>
+					{{ item.nickname }}
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import loading from '@/components/loading.vue';
 export default {
+	components: {
+		loading
+	},
 	data() {
 		return {
+			isLoad: true,
 			roomId: '',
 			userList: []
 		};
@@ -40,6 +48,7 @@ export default {
 			});
 			console.log(res);
 			this.userList = res.result.data[0].room_user;
+			this.isLoad = false;
 		},
 		//离开房间
 		async leaveRoom() {

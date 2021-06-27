@@ -200,6 +200,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _this;var wInput = function wInput() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-input */ "components/watch-login/watch-input").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-input.vue */ 131));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var wButton = function wButton() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-button */ "components/watch-login/watch-button").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-button.vue */ 138));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
@@ -210,7 +233,7 @@ var _default =
     return {
       loginForm: {
         mobile: '', // 用户/电话
-        code: "" },
+        code: '' },
 
       seconds: 30,
       tips: '',
@@ -249,7 +272,7 @@ var _default =
     },
     start: function start() {
       uni.showToast({
-        title: "验证码发送成功" });
+        title: '验证码发送成功' });
 
     },
     smsLogin: function smsLogin() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
@@ -258,24 +281,61 @@ var _default =
                 console.log(res);
                 if (res.result.code === 0) {
                   _this3.$toast(res.result.message);
-                  uni.setStorageSync("role", res.result.userInfo.role);
-                  uni.setStorageSync("uni_id_token", res.result.token);
-                  uni.setStorageSync("uid", res.result.uid);
+                  uni.setStorageSync(
+                  'userInfo',
+                  JSON.stringify(res.result.userInfo));
+
+                  uni.setStorageSync('uni_id_token', res.result.token);
+                  uni.setStorageSync('uid', res.result.uid);
+                  uni.setStorageSync('uid', res.result.uid);
                   uni.reLaunch({
-                    url: "../pagesMenu/home" });
+                    url: '../pagesMenu/home' });
 
                 } else {
                   _this3.$toast(res.result.msg);
                 }case 6:case "end":return _context2.stop();}}}, _callee2);}))();
+    },
+    getWxInfo: function getWxInfo() {
+      var that = this;
+      uni.getUserProfile({
+        lang: 'zh_CN',
+        desc: '获取你的昵称、头像、地区及性别',
+        success: function success(res) {
+          console.log(res);
+          uni.login({
+            provider: 'weixin',
+            success: function success(loginRes) {
+              console.log(loginRes.code);
+              that.loginByWx(loginRes.code);
+            } });
+
+        },
+        fail: function fail(res) {
+          console.log(res);
+        } });
+
+    },
+    loginByWx: function loginByWx(code) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
+                  _this4.$uniCloud('loginByWechat', {
+                    code: code }));case 2:res = _context3.sent;
+
+                console.log(res);
+                if (res.result.code === 0) {
+                  _this4.$toast(res.result.message);
+                  uni.setStorageSync(
+                  'userInfo',
+                  JSON.stringify(res.result.userInfo));
+
+                  uni.setStorageSync('uni_id_token', res.result.token);
+                  uni.setStorageSync('uid', res.result.uid);
+                  uni.setStorageSync('uid', res.result.uid);
+                  uni.reLaunch({
+                    url: '../pagesMenu/home' });
+
+                } else {
+                  _this4.$toast(res.result.msg);
+                }case 5:case "end":return _context3.stop();}}}, _callee3);}))();
     }
-    // login_weixin() {
-    // 	//微信登录
-    // 	uni.showToast({
-    // 		icon: 'none',
-    // 		position: 'bottom',
-    // 		title: '...'
-    // 	});
-    // },
     // login_weibo() {
     // 	//微博登录
     // 	uni.showToast({

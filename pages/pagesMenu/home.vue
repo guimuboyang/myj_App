@@ -1,53 +1,63 @@
 <template>
 	<view>
-		<view class="p-16-32">
-			<u-search
-				:clearabled="true"
-				show-action
-				animation
-				action-text="重置"
-				bg-color="#fff"
-			></u-search>
-		</view>
-		<view class="u-m-t-20">
-			<view class="" v-for="(item, index) in roomList" :key="index">
-				<u-card :title="item.room_name" @click="toDetail(item)">
-					<view slot="body">
-						<view class="u-flex u-col-center u-row-between">
-							<view>{{ item.room_des }}</view>
-							<view>
-								<u-tag
-									type="success"
-									v-if="item.is_open == true"
-									text="开放中"
-									mode="dark"
-								></u-tag>
-								<u-tag
-									type="info"
-									v-else
-									text="未开放"
-									mode="dark"
-								></u-tag>
+		<view v-if="isLoad == true"><loading></loading></view>
+		<view v-else>
+			<view class="p-16-32">
+				<u-search
+					:clearabled="true"
+					show-action
+					animation
+					action-text="重置"
+					bg-color="#fff"
+				></u-search>
+			</view>
+			<view class="u-m-t-20">
+				<view class="" v-for="(item, index) in roomList" :key="index">
+					<u-card :title="item.room_name" @click="toDetail(item)">
+						<view slot="body">
+							<view class="u-flex u-col-center u-row-between">
+								<view>{{ item.room_des }}</view>
+								<view>
+									<u-tag
+										type="success"
+										v-if="item.is_open == true"
+										text="开放中"
+										mode="dark"
+									></u-tag>
+									<u-tag
+										type="info"
+										v-else
+										text="未开放"
+										mode="dark"
+									></u-tag>
+								</view>
 							</view>
 						</view>
-					</view>
-					<view class="" slot="foot">
-						<text>
-							{{
-								item.room_user.length + '/' + item.room_userNum
-							}}
-						</text>
-					</view>
-				</u-card>
+						<view class="" slot="foot">
+							<text>
+								{{
+									item.room_user.length +
+										'/' +
+										item.room_userNum
+								}}
+							</text>
+						</view>
+					</u-card>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import loading from '@/components/loading.vue';
 export default {
+	components: {
+		loading
+	},
 	data() {
 		return {
+			isLoad: true,
 			roomList: [],
 			userInfo: {}
 		};
@@ -61,9 +71,6 @@ export default {
 	onLoad() {
 		this.getUserInfo();
 		this.backRoom();
-		// uni.navigateTo({
-		// 	url: '/pagesSubpackOne/home/room/roomDeatil'
-		// });
 	},
 	onShow() {
 		setTimeout(() => {
@@ -89,6 +96,7 @@ export default {
 			if (res.result.affectedDocs !== 0) {
 				this.roomList = res.result.data;
 			}
+			this.isLoad = false;
 		},
 		//获取个人信息
 		async getUserInfo() {

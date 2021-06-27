@@ -58,6 +58,12 @@
 					"navigationBarTitleText": "重置密码"
 				}
 			},
+			{
+				"path": "mine/setting/bind",
+				"style": {
+					"navigationBarTitleText": "绑定设置"
+				}
+			},
 			/*房间*/
 			{
 				"path": "home/room/roomDeatil",
