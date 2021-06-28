@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uVerificationCode: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-verification-code/u-verification-code */ "node-modules/uview-ui/components/u-verification-code/u-verification-code").then(__webpack_require__.bind(null, /*! uview-ui/components/u-verification-code/u-verification-code.vue */ 145))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-verification-code/u-verification-code */ "node-modules/uview-ui/components/u-verification-code/u-verification-code").then(__webpack_require__.bind(null, /*! uview-ui/components/u-verification-code/u-verification-code.vue */ 158))
     }
   }
 } catch (e) {
@@ -224,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-var _this;var wInput = function wInput() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-input */ "components/watch-login/watch-input").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-input.vue */ 131));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var wButton = function wButton() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-button */ "components/watch-login/watch-button").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-button.vue */ 138));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _this;var wInput = function wInput() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-input */ "components/watch-login/watch-input").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-input.vue */ 144));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var wButton = function wButton() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-button */ "components/watch-login/watch-button").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-button.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 //button
 var _default =
@@ -257,8 +257,15 @@ var _default =
       if (this.$refs.uCode.canGetCode) {
         setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
 
-                    _this2.$uniCloud('sendSms', {
-                      mobile: _this2.loginForm.mobile }));case 2:res = _context.sent;
+
+
+
+
+                    _this2.$uniCloud('loginMoudle', {
+                      action: 'sendSms/sendSms',
+                      data: {
+                        mobile: _this2.loginForm.mobile } }));case 2:res = _context.sent;
+
 
                   console.log(res);
                   // 这里此提示会被this.start()方法中的提示覆盖

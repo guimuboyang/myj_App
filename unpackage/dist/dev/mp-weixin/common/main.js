@@ -20,8 +20,8 @@ _vue.default.prototype.$uniCloud = /*#__PURE__*/function () {var _ref = _asyncTo
 
               uniCloud.callFunction({
                 name: name, // 云函数名字
-                data: data // 传输数据
-              }));case 3:res = _context.sent;return _context.abrupt("return",
+                data: data }));case 3:res = _context.sent;return _context.abrupt("return",
+
             res);case 7:_context.prev = 7;_context.t0 = _context["catch"](0);return _context.abrupt("return", _context.t0);case 10:_context.prev = 10;return _context.finish(10);case 12:case "end":return _context.stop();}}}, _callee, null, [[0, 7, 10, 12]]);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}();
 
 

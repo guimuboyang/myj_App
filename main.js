@@ -7,11 +7,11 @@ import uView from "uview-ui";
 Vue.use(uView);
 
 
-Vue.prototype.$uniCloud = async (name, data) => {
+Vue.prototype.$uniCloud = async (name, data, ) => {
 	try {
 		let res = await uniCloud.callFunction({
 			name, // 云函数名字
-			data // 传输数据
+			data
 		})
 		return res
 	} catch (e) {

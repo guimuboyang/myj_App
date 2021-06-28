@@ -102,8 +102,15 @@ export default {
 			if (this.$refs.uCode.canGetCode) {
 				setTimeout(async () => {
 					//获取验证码
-					let res = await this.$uniCloud('sendSms', {
-						mobile: this.loginForm.mobile
+					// let res = await this.$uniCloud('sendSms', {
+					// 	mobile: this.loginForm.mobile
+					// });
+
+					let res = await this.$uniCloud('loginMoudle', {
+						action: 'sendSms/sendSms',
+						data: {
+							mobile: this.loginForm.mobile
+						}
 					});
 					console.log(res);
 					// 这里此提示会被this.start()方法中的提示覆盖

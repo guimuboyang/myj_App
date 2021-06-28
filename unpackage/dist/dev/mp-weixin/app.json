@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/common/login",
     "pages/pagesMenu/home",
     "pages/common/passwordLogin",
-    "pages/common/login",
     "pages/common/registered",
     "pages/pagesMenu/mine",
     "pages/pagesMenu/utils"
