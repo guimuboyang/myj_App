@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uVerificationCode: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-verification-code/u-verification-code */ "node-modules/uview-ui/components/u-verification-code/u-verification-code").then(__webpack_require__.bind(null, /*! uview-ui/components/u-verification-code/u-verification-code.vue */ 158))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-verification-code/u-verification-code */ "node-modules/uview-ui/components/u-verification-code/u-verification-code").then(__webpack_require__.bind(null, /*! uview-ui/components/u-verification-code/u-verification-code.vue */ 116))
     },
     uToast: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-toast/u-toast */ "node-modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! uview-ui/components/u-toast/u-toast.vue */ 165))
@@ -199,7 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-var _this;var wInput = function wInput() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-input */ "components/watch-login/watch-input").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-input.vue */ 144));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var wButton = function wButton() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-button */ "components/watch-login/watch-button").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-button.vue */ 151));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _this;var wInput = function wInput() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-input */ "components/watch-login/watch-input").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-input.vue */ 123));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var wButton = function wButton() {__webpack_require__.e(/*! require.ensure | components/watch-login/watch-button */ "components/watch-login/watch-button").then((function () {return resolve(__webpack_require__(/*! ../../components/watch-login/watch-button.vue */ 130));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 //button
 var _default =

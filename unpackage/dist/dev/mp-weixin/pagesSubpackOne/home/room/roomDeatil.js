@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 7));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var loading = function loading() {__webpack_require__.e(/*! require.ensure | components/loading */ "components/loading").then((function () {return resolve(__webpack_require__(/*! @/components/loading.vue */ 137));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 7));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var loading = function loading() {__webpack_require__.e(/*! require.ensure | components/loading */ "components/loading").then((function () {return resolve(__webpack_require__(/*! @/components/loading.vue */ 158));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -175,8 +175,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getDetail: function getDetail() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  _this2.$uniCloud('getRoomDetail', {
-                    roomId: _this2.roomId }));case 2:res = _context.sent;
+                  _this2.$uniCloud('roomMoudle', {
+                    action: 'roomMoudle/getRoomDetail',
+                    data: {
+                      roomId: _this2.roomId } }));case 2:res = _context.sent;
+
 
                 console.log(res);
                 _this2.userList = res.result.data[0].room_user;
@@ -185,9 +188,12 @@ __webpack_require__.r(__webpack_exports__);
     //离开房间
     leaveRoom: function leaveRoom() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var uid, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 uid = uni.getStorageSync('uid');_context2.next = 3;return (
-                  _this3.$uniCloud('leaveRoom', {
-                    uid: uid,
-                    roomId: _this3.roomId }));case 3:res = _context2.sent;
+                  _this3.$uniCloud('roomMoudle', {
+                    action: 'roomMoudle/leaveRoom',
+                    data: {
+                      uid: uid,
+                      roomId: _this3.roomId } }));case 3:res = _context2.sent;
+
 
                 console.log(res);case 5:case "end":return _context2.stop();}}}, _callee2);}))();
     } } };exports.default = _default;

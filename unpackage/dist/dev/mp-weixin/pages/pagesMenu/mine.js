@@ -243,15 +243,18 @@ var _default =
       uni.stopPullDownRefresh();
     }, 1000);
   },
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     this.getUserInfo();
   },
   methods: {
     logOut: function logOut() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var uniIdToken, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 uniIdToken = uni.getStorageSync('uni_id_token');
                 console.log(typeof uniIdToken);_context.next = 4;return (
-                  _this.$uniCloud('logOut', {
-                    uniIdToken: uniIdToken }));case 4:res = _context.sent;
+                  _this.$uniCloud('loginMoudle', {
+                    action: 'loginMoudle/logOut',
+                    data: {
+                      uniIdToken: uniIdToken } }));case 4:res = _context.sent;
+
 
                 if (res.result.code == 0) {
                   uni.removeStorageSync('uni_id_token');
@@ -286,15 +289,20 @@ var _default =
     },
     saveAvatar: function saveAvatar(url) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 console.log(_this2.userInfo._id);_context3.next = 3;return (
-                  _this2.$uniCloud('setUserAvatar', {
-                    uid: _this2.userInfo._id,
-                    avatar: url }));case 3:res = _context3.sent;
+                  _this2.$uniCloud('personCenter', {
+                    action: 'personCenter/setUserAvatar',
+                    data: {
+                      uid: _this2.userInfo._id,
+                      avatar: url } }));case 3:res = _context3.sent;
+
 
                 console.log(res);
                 _this2.pic = url;case 6:case "end":return _context3.stop();}}}, _callee3);}))();
     },
     getUserInfo: function getUserInfo() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
-                  _this3.$uniCloud('getUserInfo'));case 2:res = _context4.sent;
+                  _this3.$uniCloud('personCenter', {
+                    action: 'personCenter/getUserInfo' }));case 2:res = _context4.sent;
+
                 console.log(res);
                 if (res.result.code == 0) {
                   _this3.userInfo = res.result.userInfo;

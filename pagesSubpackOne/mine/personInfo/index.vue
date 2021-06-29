@@ -36,7 +36,9 @@ export default {
 	},
 	methods: {
 		async getUserInfo() {
-			let res = await this.$uniCloud('getUserInfo');
+			let res = await this.$uniCloud('personCenter', {
+				action: 'personCenter/getUserInfo'
+			});
 			console.log(res);
 			this.userForm.nickname = res.result.userInfo.nickname;
 			this.userForm.username = res.result.userInfo.username;
@@ -48,7 +50,10 @@ export default {
 			}, 1000);
 		},
 		async saveBaseInfo() {
-			let res = await this.$uniCloud('updateUserInfo', this.userForm);
+			let res = await this.$uniCloud('personCenter', {
+				action: 'personCenter/updateUserInfo',
+				data: this.userForm
+			});
 			console.log(res);
 			if (res.result.code == 0) {
 				if (this.resetPasswordForm.password !== '') {

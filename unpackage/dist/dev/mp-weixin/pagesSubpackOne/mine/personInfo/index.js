@@ -198,7 +198,9 @@ var _default =
   },
   methods: {
     getUserInfo: function getUserInfo() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  _this.$uniCloud('getUserInfo'));case 2:res = _context.sent;
+                  _this.$uniCloud('personCenter', {
+                    action: 'personCenter/getUserInfo' }));case 2:res = _context.sent;
+
                 console.log(res);
                 _this.userForm.nickname = res.result.userInfo.nickname;
                 _this.userForm.username = res.result.userInfo.username;case 6:case "end":return _context.stop();}}}, _callee);}))();
@@ -210,7 +212,10 @@ var _default =
       }, 1000);
     },
     saveBaseInfo: function saveBaseInfo() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                  _this2.$uniCloud('updateUserInfo', _this2.userForm));case 2:res = _context2.sent;
+                  _this2.$uniCloud('personCenter', {
+                    action: 'personCenter/updateUserInfo',
+                    data: _this2.userForm }));case 2:res = _context2.sent;
+
                 console.log(res);
                 if (res.result.code == 0) {
                   if (_this2.resetPasswordForm.password !== '') {

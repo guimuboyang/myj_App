@@ -43,8 +43,11 @@ export default {
 	},
 	methods: {
 		async getDetail() {
-			let res = await this.$uniCloud('getRoomDetail', {
-				roomId: this.roomId
+			let res = await this.$uniCloud('roomMoudle', {
+				action: 'roomMoudle/getRoomDetail',
+				data: {
+					roomId: this.roomId
+				}
 			});
 			console.log(res);
 			this.userList = res.result.data[0].room_user;
@@ -53,9 +56,12 @@ export default {
 		//离开房间
 		async leaveRoom() {
 			let uid = uni.getStorageSync('uid');
-			let res = await this.$uniCloud('leaveRoom', {
-				uid: uid,
-				roomId: this.roomId
+			let res = await this.$uniCloud('roomMoudle', {
+				action: 'roomMoudle/leaveRoom',
+				data: {
+					uid: uid,
+					roomId: this.roomId
+				}
 			});
 			console.log(res);
 		}

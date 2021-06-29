@@ -91,7 +91,9 @@ export default {
 		},
 
 		async getRoomLsit() {
-			let res = await this.$uniCloud('getRoomLsit');
+			let res = await this.$uniCloud('roomMoudle', {
+				action: 'roomMoudle/getRoomLsit'
+			});
 			console.log(res);
 			if (res.result.affectedDocs !== 0) {
 				this.roomList = res.result.data;
@@ -100,7 +102,9 @@ export default {
 		},
 		//获取个人信息
 		async getUserInfo() {
-			let res = await this.$uniCloud('getUserInfo');
+			let res = await this.$uniCloud('personCenter', {
+				action: 'personCenter/getUserInfo'
+			});
 			console.log(res);
 			if (res.result.code == 0) {
 				this.userInfo = res.result.userInfo;
@@ -108,17 +112,23 @@ export default {
 		},
 		//进入房间
 		async addRoomUserNum(id) {
-			let res = await this.$uniCloud('enterRoom', {
-				_id: id,
-				userInfo: this.userInfo
+			let res = await this.$uniCloud('roomMoudle', {
+				action: 'roomMoudle/enterRoom',
+				data: {
+					_id: id,
+					userInfo: this.userInfo
+				}
 			});
 			console.log(res);
 		},
 		//跳往房间详情
 		async toDetail(item) {
 			console.log(item._id);
-			let res = await this.$uniCloud('getRoomUserNum', {
-				_id: item._id
+			let res = await this.$uniCloud('roomMoudle', {
+				action: 'roomMoudle/getRoomUserNum',
+				data: {
+					_id: item._id
+				}
 			});
 			// console.log(res);
 			if (res.result.data[0].room_user.length < item.room_userNum) {

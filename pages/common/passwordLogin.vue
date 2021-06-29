@@ -58,7 +58,10 @@ export default {
 	methods: {
 		async smsLogin() {
 			this.isRotate = true;
-			let res = await this.$uniCloud('loginByPassword', this.loginForm);
+			let res = await this.$uniCloud('loginMoudle', {
+				action: 'loginMoudle/loginByPassword',
+				data: this.loginForm
+			});
 			console.log(res);
 			if (res.result.code === 0) {
 				this.$toast(res.result.message);

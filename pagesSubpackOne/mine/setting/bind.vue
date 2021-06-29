@@ -37,8 +37,8 @@ export default {
 		};
 	},
 	onLoad(option) {
-		// this.unbindWeixin()
-		if (option.wx_openid) {
+		// this.unbindWeixin();
+		if (option.wx_openid && option.wx_openid !== 'undefined') {
 			this.isbindWX = true;
 		} else {
 			this.isbindWX = false;
@@ -58,8 +58,11 @@ export default {
 		},
 		//绑定微信
 		async bindWX(code) {
-			let res = await this.$uniCloud('bindWX', {
-				code: code
+			let res = await this.$uniCloud('loginMoudle', {
+				action: 'loginMoudle/bindWX',
+				data: {
+					code: code
+				}
 			});
 			console.log(res);
 			uni.showToast({
@@ -70,7 +73,9 @@ export default {
 		},
 		//解绑微信
 		async unbindWeixin() {
-			let res = await this.$uniCloud('unbindWeixin', {});
+			let res = await this.$uniCloud('loginMoudle', {
+				action: 'loginMoudle/unbindWeixin'
+			});
 			console.log(res);
 		}
 	}

@@ -107,7 +107,7 @@ export default {
 					// });
 
 					let res = await this.$uniCloud('loginMoudle', {
-						action: 'sendSms/sendSms',
+						action: 'loginMoudle/sendSms',
 						data: {
 							mobile: this.loginForm.mobile
 						}
@@ -129,7 +129,10 @@ export default {
 		},
 		async smsLogin() {
 			this.isRotate = true;
-			let res = await this.$uniCloud('loginBySms', this.loginForm);
+			let res = await this.$uniCloud('loginMoudle', {
+				action: 'loginMoudle/loginBySms',
+				data: this.loginForm
+			});
 			console.log(res);
 			if (res.result.code === 0) {
 				this.$toast(res.result.message);
@@ -168,8 +171,11 @@ export default {
 			});
 		},
 		async loginByWx(code) {
-			let res = await this.$uniCloud('loginByWechat', {
-				code: code
+			let res = await this.$uniCloud('loginMoudle', {
+				action: 'loginMoudle/loginByWechat',
+				data: {
+					code: code
+				}
 			});
 			console.log(res);
 			if (res.result.code === 0) {

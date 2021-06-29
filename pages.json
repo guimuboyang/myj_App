@@ -4,18 +4,19 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/common/login",
-			"style": {
-				"navigationBarTitleText": "验证码登录"
-			}
-		},
-		{
 			"path": "pages/pagesMenu/home",
 			"style": {
 				"navigationBarTitleText": "麻友记",
 				"enablePullDownRefresh": true
 			}
 		},
+		{
+			"path": "pages/common/login",
+			"style": {
+				"navigationBarTitleText": "验证码登录"
+			}
+		},
+
 		{
 			"path": "pages/common/passwordLogin",
 			"style": {

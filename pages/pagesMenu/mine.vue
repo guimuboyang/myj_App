@@ -8,7 +8,7 @@
 			</view>
 		</u-navbar> -->
 		<view class="u-flex u-col-center u-row-around user-box p-16-32">
-			<view class="u-m-r-10" @click="setAvatar()">
+			<view class="u-m-r-10 m-r-20" @click="setAvatar()">
 				<u-avatar :src="pic" size="140"></u-avatar>
 			</view>
 			<view class="u-flex-1">
@@ -79,15 +79,18 @@ export default {
 			uni.stopPullDownRefresh();
 		}, 1000);
 	},
-	onLoad() {
+	onShow() {
 		this.getUserInfo();
 	},
 	methods: {
 		async logOut() {
 			const uniIdToken = uni.getStorageSync('uni_id_token');
 			console.log(typeof uniIdToken);
-			let res = await this.$uniCloud('logOut', {
-				uniIdToken: uniIdToken
+			let res = await this.$uniCloud('loginMoudle', {
+				action: 'loginMoudle/logOut',
+				data: {
+					uniIdToken: uniIdToken
+				}
 			});
 			if (res.result.code == 0) {
 				uni.removeStorageSync('uni_id_token');
@@ -122,15 +125,20 @@ export default {
 		},
 		async saveAvatar(url) {
 			console.log(this.userInfo._id);
-			let res = await this.$uniCloud('setUserAvatar', {
-				uid: this.userInfo._id,
-				avatar: url
+			let res = await this.$uniCloud('personCenter', {
+				action: 'personCenter/setUserAvatar',
+				data: {
+					uid: this.userInfo._id,
+					avatar: url
+				}
 			});
 			console.log(res);
 			this.pic = url;
 		},
 		async getUserInfo() {
-			let res = await this.$uniCloud('getUserInfo');
+			let res = await this.$uniCloud('personCenter', {
+				action: 'personCenter/getUserInfo'
+			});
 			console.log(res);
 			if (res.result.code == 0) {
 				this.userInfo = res.result.userInfo;
